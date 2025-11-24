@@ -226,7 +226,7 @@ For detailed information about this project, please refer to the following docum
 
 ## �🔗 Repository Links
 
-- **Main Repository**: [GitHub - SecureAI MNIST Project](https://github.com/your-username/secureai-mnist)
+- **Main Repository**: [GitHub - SecureAI MNIST Project](https://github.com/garg-tech/SecureAI-Systems)
 - **Adversarial Dataset Generation**: Included in `poison_method_*.py` scripts
 
 ## 📚 References
