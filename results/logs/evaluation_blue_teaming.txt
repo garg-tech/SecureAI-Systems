@@ -1,0 +1,49 @@
+[INFO] Loaded 60000 images from train-images-idx3-ubyte
+[INFO] Loaded 60000 labels from train-labels-idx1-ubyte
+[INFO] Starting adversarial training (FGSM, on-the-fly)...
+Epoch 1/5 - Loss: 0.5801
+Epoch 2/5 - Loss: 0.2706
+Epoch 3/5 - Loss: 0.1968
+Epoch 4/5 - Loss: 0.1560
+Epoch 5/5 - Loss: 0.1377
+[INFO] Saved adversarially trained model: mnist_adv_trained_cnn.pth
+[INFO] Loaded 10000 images from t10k-images.idx3-ubyte
+[INFO] Loaded 10000 labels from t10k-labels.idx1-ubyte
+
+===== CLEAN TEST EVALUATION =====
+Clean Accuracy: 98.22%
+Clean Loss:     0.0596
+
+===== FGSM ATTACK TEST EVALUATION =====
+Adversarial Accuracy: 95.02%
+Adversarial Loss:     0.1648
+
+===== CONFUSION MATRIX (Adversarial Test) =====
+[[ 944    0    1    0    4    2   21    2    2    4]
+ [   0 1123    6    2    0    1    3    0    0    0]
+ [   5    9  987   17    2    0    2    9    1    0]
+ [   3    0   15  967    1   11    0    9    3    1]
+ [   1    1    4    0  941    0   17    5    1   12]
+ [   4    2    1   16    3  830   16    1   11    8]
+ [  12    2    4    1    5    4  927    0    2    1]
+ [   1    8   23    4    8    0    0  979    2    3]
+ [   6    3   13   10   12   17   19    4  875   15]
+ [   3    5    3    9   31    6    1   18    4  929]]
+
+===== CLASSIFICATION REPORT =====
+              precision    recall  f1-score   support
+
+           0     0.9642    0.9633    0.9638       980
+           1     0.9740    0.9894    0.9816      1135
+           2     0.9338    0.9564    0.9449      1032
+           3     0.9425    0.9574    0.9499      1010
+           4     0.9345    0.9582    0.9462       982
+           5     0.9529    0.9305    0.9416       892
+           6     0.9215    0.9676    0.9440       958
+           7     0.9533    0.9523    0.9528      1028
+           8     0.9711    0.8984    0.9333       974
+           9     0.9548    0.9207    0.9374      1009
+
+    accuracy                         0.9502     10000
+   macro avg     0.9503    0.9494    0.9496     10000
+weighted avg     0.9506    0.9502    0.9501     10000

@@ -1,0 +1,54 @@
+==============================
+  DATA POISONING + TRAINING
+==============================
+
+[INFO] Loaded 60000 images from train-images-idx3-ubyte
+[INFO] Loaded 60000 labels from train-labels-idx1-ubyte
+[INFO] Creating poisoned dataset...
+[INFO] Poisoned dataset created: 100 samples poisoned.
+[INFO] Total samples after poisoning: 60000
+[INFO] Starting poisoned model training...
+[TRAIN] Epoch 1/5 - Loss: 0.2502
+[TRAIN] Epoch 2/5 - Loss: 0.0948
+[TRAIN] Epoch 3/5 - Loss: 0.0735
+[TRAIN] Epoch 4/5 - Loss: 0.0603
+[TRAIN] Epoch 5/5 - Loss: 0.0522
+[INFO] Poisoned model saved as mnist_poisoned_1_cnn.pth
+[INFO] Loaded 10000 images from t10k-images.idx3-ubyte
+[INFO] Loaded 10000 labels from t10k-labels.idx1-ubyte
+
+===== POISONED MODEL EVALUATION =====
+Test Accuracy       : 97.59%
+Test Loss           : 0.0829
+Total Inference Time: 3.3848 sec
+Avg Time Per Image  : 0.3385 ms
+
+===== CONFUSION MATRIX =====
+[[ 955    0    5    3    3    4    3    1    2    4]
+ [   0 1128    2    2    1    0    1    0    1    0]
+ [   1    1 1006   11    1    0    0    9    2    1]
+ [   1    0    3  989    0    9    0    5    1    2]
+ [   1    2    2    0  967    0    2    1    0    7]
+ [   1    1    0    4    0  880    2    1    1    2]
+ [   1    2    4    0    2   14  935    0    0    0]
+ [   0    3    6    2    0    0    0 1014    2    1]
+ [   4    2    3   10    4   11    0    7  925    8]
+ [   1    3    1    1   18    7    0   16    2  960]]
+
+===== CLASSIFICATION REPORT =====
+              precision    recall  f1-score   support
+
+           0     0.9896    0.9745    0.9820       980
+           1     0.9877    0.9938    0.9908      1135
+           2     0.9748    0.9748    0.9748      1032
+           3     0.9677    0.9792    0.9734      1010
+           4     0.9709    0.9847    0.9778       982
+           5     0.9514    0.9865    0.9686       892
+           6     0.9915    0.9760    0.9837       958
+           7     0.9620    0.9864    0.9741      1028
+           8     0.9882    0.9497    0.9686       974
+           9     0.9746    0.9514    0.9629      1009
+
+    accuracy                         0.9759     10000
+   macro avg     0.9759    0.9757    0.9757     10000
+weighted avg     0.9761    0.9759    0.9759     10000

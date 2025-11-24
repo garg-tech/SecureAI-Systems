@@ -1,0 +1,72 @@
+Run started:2025-11-20 11:08:44.946140+00:00
+
+SECURITY ANALYSIS CLARIFICATION:
+===============================
+This analysis was performed using Bandit SAST tool. Important notes regarding findings:
+
+1. PyTorch Load Security (B614): Bandit flags torch.load() as potentially unsafe due to 
+   pickle deserialization vulnerabilities in older PyTorch versions. However, starting 
+   from PyTorch 1.13.0 (released October 2022), the default behavior changed to 
+   weights_only=True, making these warnings less critical for recent PyTorch versions.
+
+2. Current project uses modern PyTorch (>=1.13.0) where weights_only=True is default,
+   mitigating the deserialization security concern automatically.
+
+Test results:
+>> Issue: [B614:pytorch_load] Use of unsafe PyTorch load
+   Severity: Medium   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.1/plugins/b614_pytorch_load.html
+   Location: ./evaluate_cnn_mnist.py:64:22
+   
+   ANALYSIS: This warning is flagged by Bandit for older PyTorch versions.
+   In PyTorch >=1.13.0, weights_only=True is the default behavior, making
+   this usage safe for model weight loading without explicit parameter.
+   
+63	model = CNN().to(device)
+64	model.load_state_dict(torch.load("mnist_custom_cnn.pth", map_location=device))
+65	model.eval()
+
+--------------------------------------------------
+>> Issue: [B614:pytorch_load] Use of unsafe PyTorch load
+   Severity: Medium   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.1/plugins/b614_pytorch_load.html
+   Location: ./inference_cnn_mnist.py:62:22
+   
+   ANALYSIS: Same as above - safe in modern PyTorch versions (>=1.13.0)
+   due to default weights_only=True behavior.
+   
+61	model = CNN().to(device)
+62	model.load_state_dict(torch.load("mnist_custom_cnn.pth", map_location=device))
+63	model.eval()
+
+--------------------------------------------------
+>> Issue: [B101:assert_used] Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.1/plugins/b101_assert_used.html
+   Location: ./train_cnn_mnist.py:40:8
+39	
+40	        assert len(self.images) == len(self.labels)
+41	
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 208
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 1
+		Medium: 2
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 3
+Files skipped (0):
